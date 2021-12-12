@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <h1>Carga Vendedores</h1>
+</head>
+<body style="background: rgb(37, 195, 156);"">
+  <div class="seccion-titulo">
+    <h2><b></b>Cargue un Archivo JSON</b></h2> 
+    <br><br><br><br>
+    
+
+    <input type = 'file' id = 'archivoT'>
+    <br><br><br><br>
+    <button onclick="enviarInfo()">Enviar</button>
+
+    <input id="cod" type="text" class="form-control input_pass">
+    <div>
+ 
+    </div>
+    <div>
+        
+        </div>
+        <textarea id = "contenido" cols="90" rows="25">
+
+        </textarea>
+</div>
+  
+    </div>
+</body>
+<script>
+  function abrir(ev){
+    let arch = ev.target.files[0];
+    if (arch){
+        let reader = new FileReader();
+
+        reader.onload = function(a){
+            let contenido = a.target.result;
+            texto = document.getElementById("contenido");
+            texto.value = contenido;
+        };
+        reader.readAsText(arch);
+    }
+    }
+
+window.addEventListener('load', () =>{
+    document.getElementById('archivoT').addEventListener('change', abrir);
+
+});
+
+function enviarInfo(){
+    let contenido = document.getElementById('contenido')
+
+    let info = {
+        cursosEstudiantes: contenido.value
+    }
+    console.log(contenido.value)
+
+}
+
+
+</script>
+</html>
