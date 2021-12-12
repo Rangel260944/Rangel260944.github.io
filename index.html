@@ -26,8 +26,8 @@
       var password = document.querySelector('#password').value
       if (username == "Admin" && password == "12345"){
         alert("Bienvenido usuario ${username}");
-        window.location.href = 'HomeAdmin.html';
-
+       
+        window.navigate("HomeAdmin.html");
 
       }else{
         alert("Ingrese las credenciales correctas");
