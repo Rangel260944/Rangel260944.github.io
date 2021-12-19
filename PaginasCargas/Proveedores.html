@@ -38,6 +38,7 @@
                    <button onclick="enviarInfo()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Enviar</button>
                    <input type = 'file' id = 'archivoT'>
                 </div>
+             
             </div>
             <div class="bg-circle-1 bg-circle"></div>
             <div class="bg-circle-2 bg-circle"></div>
@@ -57,6 +58,9 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
         <script>
+
+            let info;
+
             function abrir(ev){
               let arch = ev.target.files[0];
               if (arch){
@@ -79,11 +83,18 @@
           function enviarInfo(){
               let contenido = document.getElementById('contenido')
           
-              let info = {
+               info = {
                   cursosEstudiantes: contenido.value
               }
               console.log(contenido.value)
               alert("El archivo fue enviado correctamente");
+          }
+
+          function imprimirDenuevo(){
+              console.log(info);
+          }
+          function Hola(){
+              console.log('Hola Mundo');
           }
           
           
