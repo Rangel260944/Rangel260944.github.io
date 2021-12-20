@@ -1,6 +1,10 @@
 class nodo{
-    constructor(dato){
+    constructor(dato, nombre, edad, correo, password){
         this.dato = dato;
+        this.nombre = nombre;
+        this.edad = edad;
+        this.correo = correo;
+        this.password =  password;
         this.izquierda = null;
         this.der = null;
         this.altura = 0;
@@ -12,8 +16,8 @@ class avl{
         this.raiz = null;
     }
 
-    insertar(valor){
-        let nuevo = new nodo(valor);
+    insertar(valor, nombre, edad, correo, password){
+        let nuevo = new nodo(valor, nombre, edad, correo, password);
 
         if(this.raiz == null){
             this.raiz= nuevo;
@@ -156,7 +160,7 @@ class avl{
     generar_nodos(raiz_actual){ //metodo preorden
         let nodos ="";
         if(raiz_actual != null){
-            nodos+= "n"+raiz_actual.dato+"[label=\""+raiz_actual.dato+"\"]\n";
+            nodos+= "n"+raiz_actual.dato+"[label=\""+"Id: "+ raiz_actual.dato+"\nNombre: "+ raiz_actual.nombre+ "\nEdad: "+ raiz_actual.edad+ "\"]\n";
             nodos+=this.generar_nodos(raiz_actual.izquierda);
             nodos+=this.generar_nodos(raiz_actual.der);
         }
