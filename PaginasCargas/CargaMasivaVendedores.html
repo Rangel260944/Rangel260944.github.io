@@ -60,18 +60,10 @@ function enviarInfo(){
 
 }
 
-cargar.addEventListener("click", (e) => {
-    e.preventDefault()
-    let valores = entrada["valores"]
-    salida.lista = valores
-    console.log(valores)
-  /*  for (let i = 0; i < valores.length; i++) {
-        lista.agregar(valores[i])
-        cargar_grafica(valores[i])
-    }*/
-    document.getElementById('mensaje').innerText = ''
-    archivo.setAttribute('disabled', '')
-})
+function leerArchivoJSON(){
+    const xhttp = new HMLHttpRequest();
+    xhttp.open('GET', '')
+}
 
 </script>
 </html>
