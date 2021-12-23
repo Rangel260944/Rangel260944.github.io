@@ -114,76 +114,78 @@
           }}
               count++;
           }
-            lista.mostrar()
+            //lista.mostrar()
             lista.generarDot()
           }
 
-          class nodo_doble{
-            constructor(valor, nombre, correo){
-                this.dato = valor;
+          class Nodo{
+            constructor(dato, nombre, correo){
+                this.dato = dato;
                 this.nombre = nombre;
                 this.correo = correo;
                 this.siguiente = null;
                 this.anterior = null;
-               
             }
         }
         
-        class lista_doble{
+        class ListaMeses{
             constructor(){
-                this.primero=null;
+            this.raiz = null;
             }
         
             insertar(dato, nombre, correo){
-                let nuevo = new nodo_doble(dato, nombre, correo);
-                if(this.primero == null){ //la lista esta vacia
-                    this.primero = nuevo;
+                let nodo_nuevo = new Nodo(dato, nombre, correo)
+                if (this.raiz == null){
+                    this.raiz = nodo_nuevo;
                 }else{
-                    let aux = this.primero;
-                    while(aux.siguiente != null){
-                        if(aux.dato==dato){
-                            console.log("el valor ya existe, No se puede insertar");
-                            return
-                        }
-                        aux = aux.siguiente;
-                    };
-                    if(aux.dato==dato){
-                        console.log("el valor ya existe, No se puede insertar");
-                        return
+                    let temporal = this.raiz;
+                    while(temporal.siguiente != null){
+                        temporal = temporal.siguiente;
                     }
-                    aux.siguiente = nuevo;
-                    nuevo.anterior = aux;
+                    temporal.siguiente = nodo_nuevo;
+                    temporal.anterior = nodo_nuevo;
                 }
             }
-            mostrar(){
-                let aux = this.primero;
-                console.log("***** Mostar Lista *****")
-                while(aux != null){
-                    var valor = aux.dato;
-                    console.log('Id: '+valor + "\nNombre: " + aux.nombre + "\nCorreo: " + aux.correo );
-                    aux = aux.siguiente;
-                }
-            }
-
             generarDot(){
-                let aux = this.primero;
-                var count = 0;
-                let cadena="digraph arbol {\n" + 'graph [rankdir=LR]' + '\n' + 'node [shape = box, color=green , style=filled, fillcolor=lightskyblue];';
-                while(aux != null){
-                        cadena+= "Node"+ toString(count) + "[label=\" Id: " + aux.dato + "\nNombre: " + aux.nombre +"\nCorreo: "+aux.correo  +"\"];\n";
-                        cadena += "Node" + toString(count-1) + "->Node"+toString(count);
-                        }
-                        count++;
-                        aux = aux.siguiente;
-                cadena+="\n}";
+                let cadena="digraph arbol {\n" + 'graph [rankdir=LR]' + '\n' + 'node [shape = circle, color=black , style=filled, fillcolor=gray93];\n';
+                cadena+= this.generar_nodos(this.raiz)
+                cadena+="\n"
+                cadena+=this.enlazar(this.raiz)
+                cadena+="\n}"
         
-                console.log(cadena);
+                console.log(cadena)
             }
         
-         
+            generar_nodos(raiz_actual){ 
+                let nodos =""
+               
+                if(raiz_actual != null){
+                    nodos+= "n"+raiz_actual.dato+"[label=\"" + "Id: "+raiz_actual.dato+"\Nombre: " + raiz_actual.nombre + "\"]\n"
+              
+                }
+                return nodos
+            }
+        
+            enlazar(raiz_actual){
+                let cadena=""
+                if(raiz_actual != null){
+                    cadena += this.enlazar(raiz_actual.siguiente)
+                    if(raiz_actual.siguiente != null){
+                        cadena+="n"+raiz_actual.dato + "-> n"+raiz_actual.siguiente.dato+"\n"
+                    }
+                    if(raiz_actual.anterior != null){
+                        cadena+= "n"+raiz_actual.siguiente.dato+"-> n"+raiz_actual.dato +"\n"
+                    }
+                
+        
+                    
+                }
+                return cadena
+            }
+        
         }
 
-        lista = new lista_doble()
+        lista = new ListaMeses()
 
 
 
