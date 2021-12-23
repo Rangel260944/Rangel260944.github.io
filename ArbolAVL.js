@@ -148,7 +148,7 @@ class avl{
     }
 
     generarDot(){
-        let cadena="digraph arbol {\n";
+        let cadena="digraph arbol {\n" +"node [shape = record, color=black , style=filled, fillcolor=olivedrab2];\n" + 'edge[arrowhead = icurve color="chocolate4" penwidth="1.5"];\n';
         cadena+= this.generar_nodos(this.raiz);
         cadena+="\n";
         cadena+=this.enlazar(this.raiz);
@@ -160,7 +160,8 @@ class avl{
     generar_nodos(raiz_actual){ //metodo preorden
         let nodos ="";
         if(raiz_actual != null){
-            nodos+= "n"+raiz_actual.dato+"[label=\""+"Id: "+ raiz_actual.dato+"\nNombre: "+ raiz_actual.nombre+ "\nEdad: "+ raiz_actual.edad+ "\"]\n";
+       
+            nodos+= "n"+raiz_actual.dato+" [ label =\"<C0>|"+"Id: "+ raiz_actual.dato+"\nNombre: "+ raiz_actual.nombre+ "\nEdad: "+ raiz_actual.edad+ "|<C1>\"];\n";
             nodos+=this.generar_nodos(raiz_actual.izquierda);
             nodos+=this.generar_nodos(raiz_actual.der);
         }
@@ -188,14 +189,14 @@ class avl{
 
 arbol = new avl();
 
-arbol.insertar(30);
-arbol.insertar(40);
-arbol.insertar(20);
-arbol.insertar(10);
-arbol.insertar(5);
-arbol.insertar(70);
-arbol.insertar(7);
-arbol.insertar(100);
+arbol.insertar(30, 'Carlos', 9);
+arbol.insertar(40, 'Gustavo', 2);
+arbol.insertar(20, 'Katherine', 60);
+arbol.insertar(10, 'Michelle', 50);
+arbol.insertar(5, 'Roberto', 40);
+arbol.insertar(70, 'Sofia', 80);
+arbol.insertar(7, 'Katherine',200);
+arbol.insertar(100, 'Puta',1000);
 
 
 arbol.inOrden(arbol.raiz);

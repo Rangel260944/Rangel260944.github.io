@@ -26,44 +26,53 @@
         <textarea id = "contenido" cols="90" rows="25">
 
         </textarea>
+        <label>Escriba el id para generar el calendario</label>
+        <input  type="id" name="id" id="id">
 </div>
   
     </div>
 </body>
 <script>
-  function abrir(ev){
-    let arch = ev.target.files[0];
-    if (arch){
-        let reader = new FileReader();
+    let info;
+    var archi;
+    let nombreArchivo;
+    function abrir(ev){
+      let arch = ev.target.files[0];
+      if (arch){
+         let reader = new FileReader();
+          reader.onload = function(a){
+              let contenido = a.target.result;
+              texto = document.getElementById("contenido");
+              texto.value = contenido;
+              let Archivojson = JSON.parse(contenido);
+              let prueba = Archivojson.vendedores;
+              let prueba2 = prueba.eventos;
+              console.log(prueba2);
+              //console.log(JSON.parse(contenido));
+              var count = 0;
+              for (x in prueba){
 
-        reader.onload = function(a){
-            let contenido = a.target.result;
-            texto = document.getElementById("contenido");
-            texto.value = contenido;
-        };
-        reader.readAsText(arch);
-    }
-    }
+                console.log('Este es el id: '+ prueba[count].id + "\nNombre: "+prueba[count].nombre + "\nEdad: " + prueba[count].edad + "\nCorreo: "+prueba[count].correo+ "\nContraseña: " +prueba[count].password );
+                arbol.insertar(prueba[count].id, prueba[count].nombre, prueba[count].edad,prueba[count].correo,prueba[count].password)
+                count++;
+            }
+            arbol.inOrden(arbol.raiz);
+            arbol.generarDot();
+            
+          
+            };
+          reader.readAsText(arch);
+      }
+      }
+  
+      window.addEventListener('load', () =>{
+      document.getElementById('archivoT').addEventListener('change', abrir);
+  
+  });
+  
 
-    window.addEventListener('load', () =>{
-    document.getElementById('archivoT').addEventListener('change', abrir);
 
-});
 
-function enviarInfo(){
-    let contenido = document.getElementById('contenido')
-
-    let info = {
-        cursosEstudiantes: contenido.value
-    }
-    console.log(contenido.value)
-
-}
-
-function leerArchivoJSON(){
-    const xhttp = new HMLHttpRequest();
-    xhttp.open('GET', '')
-}
-
+ 
 </script>
 </html>

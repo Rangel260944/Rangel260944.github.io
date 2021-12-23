@@ -33,19 +33,33 @@
         <header class="masthead text-center text-white">
             <div class="masthead-content">
                 <div class="container px-5">
-                    <h1 class="masthead-heading mb-0">Carga Vendedores</h1>
+                    <h1 class="masthead-heading mb-0">Carga Proveedores</h1>
                    <!-- <h2 class="masthead-subheading mb-0">Will Rock Your Socks Off</h2> -->
                    <button onclick="enviarInfo()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Enviar</button>
                    <input type = 'file' id = 'archivoT'>
                 </div>
             </div>
-            <div class="bg-circle-1 bg-circle"></div>
-            <div class="bg-circle-2 bg-circle"></div>
-            <div class="bg-circle-3 bg-circle"></div>
-            <div class="bg-circle-4 bg-circle"></div>
+         
             <textarea id = "contenido" cols="90" rows="25">
 
             </textarea>
+            <h1>Añadir Proveedor</h1>
+            <label>Id</label>
+            <input  type="text" name="id" id="id" >
+            <br><br>
+            <label>Nombre</label>
+            <input  type="text" name="Nombre" id="Nombre" >
+            <br><br>
+            <label>Direccion</label>
+            <input  type="text" name="Direccion" id="Direccion">
+            <br><br>
+            <label>Telefono</label>
+            <input  type="text" name="Telefono" id="Telefono">
+            <br><br>
+            <label>Correo</label>
+            <input  type="text" name="Correo" id="Correo">
+            <br><br>
+            <button onclick="añadir()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Registrar</button>
         </header>
 
         <!-- Footer-->
@@ -57,35 +71,165 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
         <script>
+            let info;
+            var archi;
+            let nombreArchivo;
+            let prueba;
             function abrir(ev){
               let arch = ev.target.files[0];
               if (arch){
-                  let reader = new FileReader();
-          
+                 let reader = new FileReader();
                   reader.onload = function(a){
                       let contenido = a.target.result;
                       texto = document.getElementById("contenido");
                       texto.value = contenido;
-                  };
+                      let Archivojson = JSON.parse(contenido);
+                      prueba = Archivojson.proveedores;
+                      console.log(JSON.parse(contenido));
+                      var count = 0;
+                      for (x in prueba){
+                        console.log('Este es el id: '+ prueba[count].id + "\nNombre: "+prueba[count].nombre + "\nDireccion: " + prueba[count].direccion + "\nCorreo: "+prueba[count].correo+ "\nTelefono : " +prueba[count].telefono);
+                        //arbol.insertar(prueba[count].id, prueba[count].nombre, prueba[count].edad,prueba[count].correo,prueba[count].password)
+                        arbol.insertar(prueba[count].id, prueba[count].nombre,prueba[count].direccion, prueba[count].telefono, prueba[count].correo)
+                        count++;
+                    }
+                  //  arbol.inOrden(arbol.raiz);
+                 //   arbol.generarDot();   
+                 arbol.generarDot()     
+                    };
                   reader.readAsText(arch);
               }
               }
-          
               window.addEventListener('load', () =>{
-              document.getElementById('archivoT').addEventListener('change', abrir);
-          
+              document.getElementById('archivoT').addEventListener('change', abrir);        
           });
-          
-          function enviarInfo(){
-              let contenido = document.getElementById('contenido')
-          
-              let info = {
-                  cursosEstudiantes: contenido.value
-              }
-              console.log(contenido.value)
-              alert("El archivo fue enviado correctamente");
-          
+
+          function añadir(){
+            var id = document.querySelector('#id').value
+            var Nombre = document.querySelector('#Nombre').value
+            var Direccion = document.querySelector('#Direccion').value
+            var Telefono = document.querySelector('#Telefono').value
+            var Correo = document.querySelector('#Correo').value
+            arbol.insertar(id, Nombre, Direccion, Telefono, Correo);
+            arbol.generarDot();
           }
+
+
+
+
+          class nodo{
+            constructor(dato, nombre, direccion, telefono, correo){
+                this.dato = dato
+                this.nombre = nombre
+                this.direccion = direccion;
+                this.telefono = telefono;
+                this.correo = correo;
+                this.izq = null
+                this.der = null
+            }
+        }
+        
+        class abb{
+            constructor(){
+                this.raiz = null
+            }
+        
+            insertar(valor, nombre, direccion, telefono, correo){
+                let nuevo = new nodo(valor, nombre, direccion, telefono, correo)
+        
+                if(this.raiz == null){
+                    this.raiz= nuevo
+                }else{
+                    this.raiz = this.insertar_nodo(this.raiz,nuevo)
+                }
+            }
+        
+            insertar_nodo(raiz_actual,nuevo){
+                if(raiz_actual != null){
+                    //recorrer hijos
+                    if(raiz_actual.dato > nuevo.dato){
+                        raiz_actual.izq = this.insertar_nodo(raiz_actual.izq,nuevo)
+        
+                    }else if(raiz_actual.dato < nuevo.dato){
+                        raiz_actual.der = this.insertar_nodo(raiz_actual.der,nuevo)
+                    }else{
+                        console.log("NO SE PUEDE INSERTAR EL DATO PORQUE YA EXISTE")
+                    }
+        
+                    return raiz_actual
+                }else{
+                    raiz_actual = nuevo
+                    return raiz_actual
+                }
+            }
+        
+            preorden(raiz_actual){
+                if(raiz_actual != null){
+                    console.log(raiz_actual.dato)
+                    this.preorden(raiz_actual.izq)
+                    this.preorden(raiz_actual.der)
+                }
+            }
+        
+            inOrden(raiz_actual){
+                if(raiz_actual != null){
+                    this.inOrden(raiz_actual.izq)
+                    console.log(raiz_actual.dato)
+                    this.inOrden(raiz_actual.der)
+                }
+            }
+        
+            postOrden(raiz_actual){
+                if(raiz_actual != null){
+                    this.postOrden(raiz_actual.izq)
+                    this.postOrden(raiz_actual.der)
+                    console.log(raiz_actual.dato)
+                }
+            }
+        
+            generarDot(){
+                let cadena="digraph arbol {\n"
+                cadena+= this.generar_nodos(this.raiz)
+                cadena+="\n"
+                cadena+=this.enlazar(this.raiz)
+                cadena+="\n}"
+        
+                console.log(cadena)
+            }
+        
+            generar_nodos(raiz_actual){ //metodo preorden
+                let nodos =""
+                if(raiz_actual != null){
+                    nodos+= "n"+raiz_actual.dato+"[label=\"" + "Id: "+raiz_actual.dato+"\nNombre: "+ raiz_actual.nombre+"\nDireccion: "+ raiz_actual.direccion + "\nTelefono: " + raiz_actual.telefono + "\nCorreo: " + raiz_actual.correo + "\"]\n"
+                    nodos+=this.generar_nodos(raiz_actual.izq)
+                    nodos+=this.generar_nodos(raiz_actual.der)
+                }
+                return nodos
+            }
+        
+            enlazar(raiz_actual){
+                let cadena=""
+                if(raiz_actual != null){
+                    cadena += this.enlazar(raiz_actual.izq)
+                    cadena += this.enlazar(raiz_actual.der)
+                    //validaciones
+                    if(raiz_actual.izq != null){
+                        cadena+="n"+raiz_actual.dato + "-> n"+raiz_actual.izq.dato+"\n"
+                    }
+                    if(raiz_actual.der != null){
+                        cadena+="n"+raiz_actual.dato + "-> n"+raiz_actual.der.dato+"\n"
+                    }
+        
+                    
+                }
+                return cadena
+            }
+        }
+
+
+        arbol = new abb()
+
+
           
           
           </script>

@@ -1,7 +1,10 @@
 class nodo{
-    constructor(dato, nombre){
+    constructor(dato, nombre, direccion, telefono, correo){
         this.dato = dato
         this.nombre = nombre
+        this.direccion = direccion;
+        this.telefono = telefono;
+        this.correo = correo;
         this.izq = null
         this.der = null
     }
@@ -12,8 +15,8 @@ class abb{
         this.raiz = null
     }
 
-    insertar(valor, nombre){
-        let nuevo = new nodo(valor, nombre)
+    insertar(valor, nombre, direccion, telefono, correo){
+        let nuevo = new nodo(valor, nombre, direccion, telefono, correo)
 
         if(this.raiz == null){
             this.raiz= nuevo
@@ -78,7 +81,7 @@ class abb{
     generar_nodos(raiz_actual){ //metodo preorden
         let nodos =""
         if(raiz_actual != null){
-            nodos+= "n"+raiz_actual.dato+"[label=\"" + "Id: "+raiz_actual.dato+"\nNombre: "+ raiz_actual.nombre+ "\"]\n"
+            nodos+= "n"+raiz_actual.dato+"[label=\"" + "Id: "+raiz_actual.dato+"\nNombre: "+ raiz_actual.nombre+"\nDireccion: "+ raiz_actual.direccion + "\nTelefono: " + raiz_actual.telefono + "\nCorreo: " + raiz_actual.correo + "\"]\n"
             nodos+=this.generar_nodos(raiz_actual.izq)
             nodos+=this.generar_nodos(raiz_actual.der)
         }
@@ -105,7 +108,8 @@ class abb{
 }
 
 arbol = new abb()
-arbol.insertar(30, 'Carlos')
+arbol.insertar(30, 'Carlos', 'asldkasd', 654654, 'asda@gmail.com')
+/*
 arbol.insertar(40, 'Katherine')
 arbol.insertar(20, 'Luis')
 arbol.insertar(10, 'Emily')
@@ -113,6 +117,7 @@ arbol.insertar(5, 'Roberto')
 arbol.insertar(70, 'Daniel')
 arbol.insertar(7, 'Naomi')
 arbol.insertar(100, 'Cristian')
+*/
 console.log("***RECORRIDO PREORDEN****")
 arbol.preorden(arbol.raiz)
 console.log("***RECORRIDO InOrden****")

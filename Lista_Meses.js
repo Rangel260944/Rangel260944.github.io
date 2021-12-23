@@ -25,7 +25,7 @@ class ListaMeses{
         }
     }
     generarDot(){
-        let cadena="digraph arbol {\n" + 'graph [rankdir=LR]' + '\n' + 'node [shape = box, color=green , style=filled, fillcolor=lightskyblue];';
+        let cadena="digraph arbol {\n" + 'graph [rankdir=LR]' + '\n' + 'node [shape = circle, color=black , style=filled, fillcolor=gray93];\n';
         cadena+= this.generar_nodos(this.raiz)
         cadena+="\n"
         cadena+=this.enlazar(this.raiz)
@@ -61,10 +61,9 @@ class ListaMeses{
     }
 
 }
-/*Meses = new ListaMeses()
+Meses = new ListaMeses()
 Meses.insertar(1)
 Meses.insertar(8)
 Meses.insertar(7)
 Meses.insertar(6)
-Meses.generarDot()*/
-export default ListaMeses;
+Meses.generarDot()
