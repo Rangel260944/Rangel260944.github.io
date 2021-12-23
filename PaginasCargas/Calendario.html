@@ -184,7 +184,7 @@
                 }
             }
             generarDot(){
-                let cadena="digraph arbol {\n" + 'graph [rankdir=LR]' + '\n' + 'node [shape = circle, color=black , style=filled, fillcolor=gray93];\n';
+                let cadena="digraph arbol {\n" + 'graph [rankdir=LR]' + '\n' + 'node [shape = box, color=deepskyblue , style=filled, fillcolor=darkslategray2];\n';
                 cadena+= this.generar_nodos(this.raiz)
                 cadena+="\n"
                 cadena+=this.enlazar(this.raiz)
@@ -197,7 +197,7 @@
                 let nodos =""
                
                 if(raiz_actual != null){
-                    nodos+= "n"+raiz_actual.dato+"[label=\"" + "Id: "+raiz_actual.dato+"\Nombre: " + raiz_actual.nombre + "\"]\n"
+                    nodos+= "n"+raiz_actual.dato+"[label=\"" + "Id: "+raiz_actual.dato+"\Nombre: " + raiz_actual.nombre+ raiz_actual.dato + "\"]\n"
               
                 }
                 return nodos
