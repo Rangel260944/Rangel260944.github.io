@@ -146,7 +146,7 @@
         
             insertar_nodo(raiz_actual,nuevo){
                 if(raiz_actual != null){
-                    //recorrer hijos
+                   
                     if(raiz_actual.dato > nuevo.dato){
                         raiz_actual.izq = this.insertar_nodo(raiz_actual.izq,nuevo)
         
@@ -197,7 +197,7 @@
                 console.log(cadena)
             }
         
-            generar_nodos(raiz_actual){ //metodo preorden
+            generar_nodos(raiz_actual){ 
                 let nodos =""
                 if(raiz_actual != null){
                     nodos+= "n"+raiz_actual.dato+"[label=\"" + "Id: "+raiz_actual.dato+"\nNombre: "+ raiz_actual.nombre+"\nDireccion: "+ raiz_actual.direccion + "\nTelefono: " + raiz_actual.telefono + "\nCorreo: " + raiz_actual.correo + "\"]\n"
@@ -212,7 +212,7 @@
                 if(raiz_actual != null){
                     cadena += this.enlazar(raiz_actual.izq)
                     cadena += this.enlazar(raiz_actual.der)
-                    //validaciones
+                    
                     if(raiz_actual.izq != null){
                         cadena+="n"+raiz_actual.dato + "-> n"+raiz_actual.izq.dato+"\n"
                     }

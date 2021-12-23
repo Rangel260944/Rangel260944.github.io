@@ -33,7 +33,7 @@
         <header class="masthead text-center text-white">
             <div class="masthead-content">
                 <div class="container px-5">
-                    <h1 class="masthead-heading mb-0">Carga Eventos</h1>
+                    <h1 class="masthead-heading mb-0">Carga Eventos y Listado de Meses</h1>
                    <!-- <h2 class="masthead-subheading mb-0">Will Rock Your Socks Off</h2> -->
                    <button onclick="enviarInfo()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Enviar</button>
                    <input type = 'file' id = 'archivoT'>
@@ -144,10 +144,12 @@
                   for(eventos in prueba2){
                       console.log(prueba[count].eventos[count2].desc);
                       matriz1.insertar(prueba[count].eventos[count2].desc,prueba[count].eventos[count2].dia, prueba[count].eventos[count2].hora)                                
+                      lista.insertarMes(prueba[count].eventos[count2].mes)
                       count2++;
                   }    
            }count++;
           }matriz1.graficar_matriz()
+          lista.generarDotLista()
          // var texto = cadena;
 
        // document.getElementById("DOT").innerHTML = texto;
@@ -522,7 +524,74 @@
         let matriz1 = new matriz();
         
         
+        class Nodo{
+            constructor(dato){
+                this.dato = dato;
+
+                this.siguiente = null;
+                this.anterior = null;
+            }
+        }
         
+        class ListaMeses{
+            constructor(){
+            this.raiz = null;
+            }
+        
+            insertarMes(dato){
+                let nodo_nuevo = new Nodo(dato)
+                if (this.raiz == null){
+                    this.raiz = nodo_nuevo;
+                }else{
+                    let temporal = this.raiz;
+                    while(temporal.siguiente != null){
+                        temporal = temporal.siguiente;
+                    }
+                    temporal.siguiente = nodo_nuevo;
+                    temporal.anterior = nodo_nuevo;
+                }
+            }
+            generarDotLista(){
+                let cadena="digraph arbol {\n" + 'graph [rankdir=LR]' + '\n' + 'node [shape = circle, color=black , style=filled, fillcolor=gray93];\n';
+                cadena+= this.generar_nodos(this.raiz)
+                cadena+="\n"
+                cadena+=this.enlazar(this.raiz)
+                cadena+="\n}"
+        
+                console.log(cadena)
+            }
+        
+            generar_nodos(raiz_actual){ 
+                let nodos =""
+               
+                if(raiz_actual != null){
+                    nodos+= "n"+raiz_actual.dato+"[label=\"" + "Id: "+raiz_actual.dato+"\"]\n"
+              
+                }
+                return nodos
+            }
+        
+            enlazar(raiz_actual){
+                let cadena=""
+                if(raiz_actual != null){
+                    cadena += this.enlazar(raiz_actual.siguiente)
+                    if(raiz_actual.siguiente != null){
+                        cadena+="n"+raiz_actual.dato + "-> n"+raiz_actual.siguiente.dato+"\n"
+                    }
+                    if(raiz_actual.anterior != null){
+                        cadena+= "n"+raiz_actual.siguiente.dato+"-> n"+raiz_actual.dato +"\n"
+                    }
+                
+        
+                    
+                }
+                return cadena
+            }
+        
+        }
+
+        lista = new ListaMeses()
+
         
          
         </script>
