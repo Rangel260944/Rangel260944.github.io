@@ -39,10 +39,7 @@
                    <input type = 'file' id = 'archivoT'>
                 </div>
             </div>
-            <div class="bg-circle-1 bg-circle"></div>
-            <div class="bg-circle-2 bg-circle"></div>
-            <div class="bg-circle-3 bg-circle"></div>
-            <div class="bg-circle-4 bg-circle"></div>
+
             <textarea id = "contenido" cols="90" rows="25">
 
             </textarea>
@@ -60,6 +57,21 @@
             <textarea id = "DOT" cols="90" rows="25">
 
             </textarea></div>
+            <h1 class="masthead-heading mb-0">Insertar Cliente</h1>
+            <label>Ingrese el id del vendedor: </label>
+            <input  type="id" name="idVendedor" id="idVendedor" >
+            <br><br>
+            <label>Ingrese el id del Cliente: </label>
+            <input  type="id" name="idCliente" id="idCliente" >
+            <br><br>
+            <label>Ingrese el nombre del Cliente:  </label>
+            <input  type="id" name="NCliente" id="NCliente" >
+            <br><br>
+            <label>Ingrese el correo del Cliente:  </label>
+            <input  type="id" name="CCliente" id="CCliente" >
+            <br><br>
+            <button onclick="insertarCliente()" class="btn btn-primary btn-xl rounded-pill mt-5">Añadir Cliente</button>
+
         </header>
 
         <!-- Footer-->
@@ -116,6 +128,31 @@
           }
             //lista.mostrar()
             lista.generarDot()
+          }
+
+
+          function insertarCliente(){
+            var idVendedor = document.querySelector('#idVendedor').value
+            var idCliente = document.querySelector('#idCliente').value
+            var NCliente = document.querySelector('#NCliente').value
+            var CCliente = document.querySelector('#CCliente').value
+            var count = 0;
+            var count2 = 0;
+            for(x in  prueba){
+                let prueba2 = prueba[count].clientes;
+                if(idVendedor == prueba[count].id){
+             for (y in prueba[count].clientes){
+              //console.log( "Nombre: "+ prueba[count].clientes[count2].nombre +"\nId: " + prueba[count].clientes[count2].id + "\nCorreo: "+ prueba[count].clientes[count2].correo);
+              //lista.insertar(prueba[count].clientes[count2].id, prueba[count].clientes[count2].nombre,prueba[count].clientes[count2].correo)
+              lista.insertar(idCliente, )
+              count2++;
+          }}
+              count++;
+          }
+            //lista.mostrar()
+            lista.generarDot()
+
+
           }
 
           class Nodo{
