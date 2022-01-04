@@ -1,28 +1,58 @@
 {
     "productos":[
         {
-            "id":111,
+            "id":11,
             "nombre":"producto1",
             "precio":150.75,
             "cantidad":150
         },
         {
-            "id":112,
+            "id":200,
             "nombre":"producto2",
             "precio":150,
             "cantidad":500
         },   
         {
-            "id":113,
+            "id":13,
             "nombre":"producto3",
             "precio":50,
             "cantidad":100
         },
         {
-            "id":114,
+            "id":24,
             "nombre":"producto4",
             "precio":14.90,
             "cantidad":1000
-        }                     
+        },  
+        {
+            "id":60,
+            "nombre":"producto4",
+            "precio":14.90,
+            "cantidad":1000
+        },
+        {
+            "id":72,
+            "nombre":"producto4",
+            "precio":14.90,
+            "cantidad":1000
+        },
+        {
+            "id":39,
+            "nombre":"producto4",
+            "precio":14.90,
+            "cantidad":1000
+        },
+        {
+            "id":2,
+            "nombre":"producto4",
+            "precio":14.90,
+            "cantidad":1000
+        },
+        {
+            "id":50,
+            "nombre":"producto4",
+            "precio":14.90,
+            "cantidad":1000
+        }             
     ]
 }

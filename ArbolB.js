@@ -1,6 +1,9 @@
 class nodoB{
-    constructor(dato){
+    constructor(dato, nombre, precio, cantidad){
         this.dato = dato;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
         //apuntadores de lista - tipo nodoB
         this.siguiente = null; 
         this.anterior = null;
@@ -178,8 +181,8 @@ class Arbol_B{
         this.altura =0;
     }
 
-    insertar_nodo(dato){
-        let nuevo = new nodoB(dato);
+    insertar_nodo(dato, nombre, precio, cantidad){
+        let nuevo = new nodoB(dato, nombre, precio, cantidad);
         
         if(this.raiz == null){
             this.raiz = new pagina();
@@ -279,7 +282,7 @@ class Arbol_B{
             let aux = raiz_actual.claves.primero;
             while(aux!=null){
                 contador++;
-                cadena+="|{"+aux.dato+"}|<p"+contador+"> ";
+                cadena+="|{"+"Id: "+aux.dato+"\nNombre: "+aux.nombre+"\nPrecio: "+aux.precio+"\nCantidad: "+aux.cantidad+"}|<p"+contador+"> ";
                 aux= aux.siguiente;
             }
             cadena+="\"]"+raiz_actual.claves.primero.dato+";\n";
@@ -329,24 +332,23 @@ class Arbol_B{
 
 
 let arbol = new Arbol_B();
-arbol.insertar_nodo(5);
-arbol.insertar_nodo(1);
-arbol.insertar_nodo(7);
-arbol.insertar_nodo(3);
-arbol.insertar_nodo(13);
-arbol.insertar_nodo(8);
-arbol.insertar_nodo(35);
-arbol.insertar_nodo(14);
-arbol.insertar_nodo(10);
-arbol.insertar_nodo(9);
-arbol.insertar_nodo(12);
-arbol.insertar_nodo(17);
-arbol.insertar_nodo(22);
-arbol.insertar_nodo(25);
-
-arbol.insertar_nodo(100);
-arbol.insertar_nodo(150);
-arbol.insertar_nodo(220);
-arbol.insertar_nodo(325);
+arbol.insertar_nodo(5, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(1, 'Producto2', 0.57, 50);
+arbol.insertar_nodo(7, 'Producto3', 57, 1500);
+arbol.insertar_nodo(3, 'Producto4', 140.57, 150);
+arbol.insertar_nodo(13, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(8, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(35, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(14, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(10, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(9, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(12, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(17, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(22, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(25, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(100, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(150, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(220, 'Producto1', 140.57, 150);
+arbol.insertar_nodo(325, 'Producto1', 140.57, 150);
 
 console.log(arbol.graficar());
