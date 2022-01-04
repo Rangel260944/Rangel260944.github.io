@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>One Page Wonder - Start Bootstrap Template</title>
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Font Awesome icons (free version)-->
+        <script src="https://use.fontawesome.com/releases/v5.15.4/js/all.js" crossorigin="anonymous"></script>
+        <!-- Google fonts-->
+        <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet" />
+        <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body id="page-top">
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
+            <div class="container px-5">
+                <a class="navbar-brand" href="#page-top">Seccion de Carga Masiva</a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ms-auto">
+                        <li class="nav-item"><a class="nav-link" href="C:\Users\Carlos Rangel\Documents\GitHub\Rangel260944.github.io\HomeAdmin.html">Regresar al inicio</a></li>
+                       
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="masthead text-center text-white">
+            <div class="masthead-content">
+                <div class="container px-5">
+                    <h1 class="masthead-heading mb-0">Carga Productos</h1>
+                   <!-- <h2 class="masthead-subheading mb-0">Will Rock Your Socks Off</h2> -->
+                   <button onclick="enviarInfo()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Enviar</button>
+                
+                   <input type = 'file' id = 'archivoT'>
+                
+                </div>
+               
+             
+            </div>
+    
+            <textarea id = "contenido" cols="90" rows="25">
+
+            </textarea>
+            <h1 class="masthead-heading mb-0">Archivo DOT</h1>
+            <textarea id = "contenido2" cols="90" rows="25">
+
+            </textarea>
+            <h1>Añadir Vendedor</h1>
+            <label>Id</label>
+            <input  type="text" name="id" id="id" >
+            <br><br>
+            <label>Nombre</label>
+            <input  type="text" name="Nombre" id="Nombre" >
+            <br><br>
+            <label>Edad</label>
+            <input  type="Edad" name="Edad" id="Edad">
+            <br><br>
+            <label>Correo</label>
+            <input  type="Correo" name="Correo" id="Correo" >
+            <br><br>
+            <label>Password</label>
+            <input  type="Password" name="Password" id="Password" >
+            <br><br>
+            <button onclick="añadir()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Registrar</button>
+            <h1>
+                Eliminar
+            </h1>
+            <input type="eliminar" name="eliminar" id="eliminar">
+            <button onclick= "eliminar()">Eliminar</button>
+
+    
+
+
+        </header>
+
+        <!-- Footer-->
+        <footer class="py-5 bg-black">
+            <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2021</p></div>
+        </footer>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+      
+ 
+        <script>
+            let info;
+            var archi;
+            let nombreArchivo;
+            let prueba;
+            function abrir(ev){
+              let arch = ev.target.files[0];
+              if (arch){
+                 let reader = new FileReader();
+                  reader.onload = function(a){
+                      let contenido = a.target.result;
+                      texto = document.getElementById("contenido");
+                      texto.value = contenido;
+                      let Archivojson = JSON.parse(contenido);
+                      prueba = Archivojson.vendedores;
+                      //console.log(JSON.parse(contenido));
+                      var count = 0;
+                      for (x in prueba){
+                        console.log('Este es el id: '+ prueba[count].id + "\nNombre: "+prueba[count].nombre + "\nEdad: " + prueba[count].edad + "\nCorreo: "+prueba[count].correo+ "\nContraseña: " +prueba[count].password );
+                        arbol.insertar(prueba[count].id, prueba[count].nombre, prueba[count].edad,prueba[count].correo,prueba[count].password)
+                        count++;
+                    }
+                    arbol.inOrden(arbol.raiz);
+                    arbol.generarDot();        
+                    };
+                  reader.readAsText(arch);
+              }
+              }
+              window.addEventListener('load', () =>{
+              document.getElementById('archivoT').addEventListener('change', abrir);        
+          });
+          
+       
+          function enviarInfo(){
+            console.log("El archivo fue enviado correctamente :D ");
+    
+          }
+          function Generar(){
+            arbol.generarDot();
+          }
+          function añadir(){
+            var id = document.querySelector('#id').value
+            var Nombre = document.querySelector('#Nombre').value
+            var Edad = document.querySelector('#Edad').value
+            var Correo = document.querySelector('#Correo').value
+            var Password = document.querySelector('#Password').value
+            arbol.insertar(id, Nombre, Edad, Correo, Password);
+            arbol.generarDot();
+          }
+          function eliminar(){
+            var count =0;
+            var eliminar = document.querySelector('#eliminar').value
+            for (x in prueba){
+                if(eliminar != prueba[count].id){
+                    arbol.insertar(prueba[count].id, prueba[count].nombre, prueba[count].edad,prueba[count].correo,prueba[count].password)
+
+                
+                   
+
+            }else if(eliminar == prueba[count].id){
+                console.log("El dato " + eliminar +" fue eliminado"); 
+            }
+            count++; 
+            }
+            //arbol.inOrden(arbol.raiz);
+            arbol.generarDot(); 
+
+          }
+
+  
+
+
+
+
+          
+          
+        </script>
+    </body>
+</html>
