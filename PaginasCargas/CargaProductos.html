@@ -35,7 +35,6 @@
                 <div class="container px-5">
                     <h1 class="masthead-heading mb-0">Carga Productos</h1>
                    <!-- <h2 class="masthead-subheading mb-0">Will Rock Your Socks Off</h2> -->
-                   <button onclick="enviarInfo()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Enviar</button>
                 
                    <input type = 'file' id = 'archivoT'>
                 
@@ -68,19 +67,21 @@
             <input  type="text" name="id" id="id" >
             <br><br>
             <label>Nombre</label>
-            <input  type="text" name="Nombre" id="Nombre" >
+            <input  type="text" name="nombre" id="nombre" >
             <br><br>
             <label>Precio</label>
-            <input  type="Edad" name="Edad" id="Edad">
+            <input  type="text" name="precio" id="precio">
             <br><br>
             <label>Cantidad</label>
-            <input  type="Correo" name="Correo" id="Correo" >
+            <input  type="text" name="cantidad" id="cantidad" >
+            <br><br>
+            <button onclick="Nuevo_Producto()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Añadir Producto</button>
 
         </header>
 
         <!-- Footer-->
         <footer class="py-5 bg-black">
-            <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Your Website 2021</p></div>
+            <div class="container px-5"><p class="m-0 text-center text-white small">Copyright &copy; Carlos Roberto Rangel Castillo 201907636</p></div>
         </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
@@ -103,18 +104,15 @@
                       texto.value = contenido;
                       let Archivojson = JSON.parse(contenido);
                       prueba = Archivojson.productos;
-                      //console.log(JSON.parse(contenido));
                       var count = 0;
                       for (x in prueba){
                         console.log('Este es el id: '+ prueba[count].id + "\nNombre: "+prueba[count].nombre + "\nPrecio: " + prueba[count].precio + "\nCantidad: "+prueba[count].cantidad);
-                        //arbol.insertar(prueba[count].id, prueba[count].nombre, prueba[count].edad,prueba[count].correo,prueba[count].password)
                         arbol.insertar_nodo(prueba[count].id, prueba[count].nombre,prueba[count].precio,prueba[count].cantidad)
                         count++;
                     }
                     //Generar dot
                     console.log(arbol.graficar())
-                    //arbol.inOrden(arbol.raiz);
-                   // arbol.generarDot();        
+      
                     };
                   reader.readAsText(arch);
               }
@@ -123,50 +121,19 @@
               document.getElementById('archivoT').addEventListener('change', abrir);        
           });
           
-      
-
-
-          function enviarInfo(){
-            console.log("El archivo fue enviado correctamente :D ");
-    
-          }
-          function Generar(){
-            arbol.generarDot();
-          }
-          function añadir(){
-            var id = document.querySelector('#id').value
-            var Nombre = document.querySelector('#Nombre').value
-            var Edad = document.querySelector('#Precio').value
-            var Correo = document.querySelector('#Cantidad').value
-            var Password = document.querySelector('#Password').value
-            arbol.insertar(id, Nombre, Edad, Correo, Password);
-            arbol.generarDot();
-          }
-          function eliminar(){
-            var count =0;
-            var eliminar = document.querySelector('#eliminar').value
-            for (x in prueba){
-                if(eliminar != prueba[count].id){
-                    arbol.insertar(prueba[count].id, prueba[count].nombre, prueba[count].edad,prueba[count].correo,prueba[count].password)
-
-                
-                   
-
-            }else if(eliminar == prueba[count].id){
-                console.log("El dato " + eliminar +" fue eliminado"); 
-            }
-            count++; 
-            }
-            //arbol.inOrden(arbol.raiz);
-            arbol.generarDot(); 
-
-          }
-
 
           function GenerarDot(){
 
             document.getElementById("Dot").innerHTML = arbol.graficar();
 
+          }
+          function Nuevo_Producto(){
+            var id = document.querySelector('#id').value
+            var nombre = document.querySelector('#nombre').value
+            var precio = document.querySelector('#precio').value
+            var cantidad = document.querySelector('#cantidad').value              
+            arbol.insertar_nodo(id, nombre,precio, cantidad)
+            document.getElementById("Dot").innerHTML = arbol.graficar();
           }
 
 
