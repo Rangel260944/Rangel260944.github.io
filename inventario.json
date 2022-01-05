@@ -1,0 +1,63 @@
+{
+    "productos": [{
+            "id": 9,
+            "nombre": "camisa",
+            "precio": 70.69,
+            "cantidad": 105
+        },
+        {
+            "id": 63,
+            "nombre": "zapatos",
+            "precio": 18.88,
+            "cantidad": 247
+        },
+        {
+            "id": 21,
+            "nombre": "calcetines",
+            "precio": 127.65,
+            "cantidad": 424
+        },
+        {
+            "id": 7,
+            "nombre": "pantalones",
+            "precio": 284.61,
+            "cantidad": 245
+        },
+        {
+            "id": 45,
+            "nombre": "blusas",
+            "precio": 106.19,
+            "cantidad": 428
+        },
+        {
+            "id": 54,
+            "nombre": "camiseta",
+            "precio": 53.95,
+            "cantidad": 198
+        },
+        {
+            "id": 72,
+            "nombre": "guantes",
+            "precio": 36.56,
+            "cantidad": 211
+        },
+        {
+            "id": 84,
+            "nombre": "medias",
+            "precio": 136.96,
+            "cantidad": 463
+        },
+        {
+            "id": 25,
+            "nombre": "corbatas",
+            "precio": 73.03,
+            "cantidad": 43
+        },
+        {
+            "id": 60,
+            "nombre": "corbatines",
+            "precio": 56.74,
+            "cantidad": 366
+        }
+    ]
+}

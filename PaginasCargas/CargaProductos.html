@@ -56,7 +56,7 @@
             <h1 class="masthead-heading mb-0">Visualiza tu Grafica :D</h1>
            
             <br><br>
-            <div>
+            <div id = 'Graphviz'>
                 <iframe frameborder="0" width="1400" height="1000" src="https://dreampuf.github.io/GraphvizOnline/#digraph%20G%20%7B%0A%0A%20%20subgraph%20cluster_0%20%7B%0A%20%20%20%20style%3Dfilled%3B%0A%20%20%20%20color%3Dlightgrey%3B%0A%20%20%20%20node%20%5Bstyle%3Dfilled%2Ccolor%3Dwhite%5D%3B%0A%20%20%20%20a0%20-%3E%20a1%20-%3E%20a2%20-%3E%20a3%3B%0A%20%20%20%20label%20%3D%20%22process%20%231%22%3B%0A%20%20%7D%0A%0A%20%20subgraph%20cluster_1%20%7B%0A%20%20%20%20node%20%5Bstyle%3Dfilled%5D%3B%0A%20%20%20%20b0%20-%3E%20b1%20-%3E%20b2%20-%3E%20b3%3B%0A%20%20%20%20label%20%3D%20%22process%20%232%22%3B%0A%20%20%20%20color%3Dblue%0A%20%20%7D%0A%20%20start%20-%3E%20a0%3B%0A%20%20start%20-%3E%20b0%3B%0A%20%20a1%20-%3E%20b3%3B%0A%20%20b2%20-%3E%20a3%3B%0A%20%20a3%20-%3E%20a0%3B%0A%20%20a3%20-%3E%20end%3B%0A%20%20b3%20-%3E%20end%3B%0A%0A%20%20start%20%5Bshape%3DMdiamond%5D%3B%0A%20%20end%20%5Bshape%3DMsquare%5D%3B%0A%7D"></iframe>
             </div>
             <br><br>
@@ -112,6 +112,7 @@
                     }
                     //Generar dot
                     console.log(arbol.graficar())
+                    Grafica()
       
                     };
                   reader.readAsText(arch);
@@ -120,6 +121,15 @@
               window.addEventListener('load', () =>{
               document.getElementById('archivoT').addEventListener('change', abrir);        
           });
+
+          function Grafica(){
+            link = "https://dreampuf.github.io/GraphvizOnline/#"+arbol.graficar();
+            link = link.replace(/(\r\n|\n|\r)/gm, "");
+            console.log(link);
+            NuevaRuta = "<iframe id='graph' src='"+link+"' height='1000px' style='width: 1400px''></iframe>"
+            
+            document.getElementById("Graphviz").innerHTML = NuevaRuta;
+          }
           
 
           function GenerarDot(){
@@ -133,7 +143,7 @@
             var precio = document.querySelector('#precio').value
             var cantidad = document.querySelector('#cantidad').value              
             arbol.insertar_nodo(id, nombre,precio, cantidad)
-            document.getElementById("Dot").innerHTML = arbol.graficar();
+            document.getElementById("Dot").innerHTML = Grafica();
           }
 
 
@@ -403,7 +413,7 @@
             graficar(){
                 let cadena="digraph arbolB{\n";
                 cadena+="rankr=TB;\n";
-                cadena+="node[shape = box,fillcolor=\"azure2\" color=\"black\" style=\"filled\"];\n";
+                cadena+="node[shape = box,fillcolor=\"crimson\" color=\"black\" style=\"filled\"];\n";
                 //metodos para graficar el arbol
                 cadena+= this.graficar_nodos(this.raiz);
                 cadena+=  this.graficar_enlaces(this.raiz);

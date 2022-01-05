@@ -144,6 +144,7 @@ node4:p -> node7:s19;
 
 }
 */
+/*
     generar_dot(){
         let cadena="digraph Hash{\n";
         cadena+="rankdir=LR;\n";
@@ -163,7 +164,7 @@ node4:p -> node7:s19;
 
     }
 
-
+*/
 
 
 }
