@@ -33,7 +33,7 @@
         <header class="masthead text-center text-white">
             <div class="masthead-content">
                 <div class="container px-5">
-                    <h1 class="masthead-heading mb-0">Carga Bodega</h1>
+                    <h1 class="masthead-heading mb-0">Carga Ventas</h1>
                    <!-- <h2 class="masthead-subheading mb-0">Will Rock Your Socks Off</h2> -->
                 
                    <input type = 'file' id = 'archivoT'>
@@ -104,23 +104,39 @@
                       texto = document.getElementById("contenido");
                       texto.value = contenido;
                       let Archivojson = JSON.parse(contenido);
-                      prueba = Archivojson.rutas;
-                      prueba2 = prueba.adyacentes;
+                      prueba = Archivojson.ventas;
+                      prueba2 = prueba.productos;
                       var count = 0;
-                      
+                      let Array=[]
                       for(x in prueba){
-                        console.log("Id: "+prueba[count].id +"\nNombre: " + prueba[count].nombre)
-                        grafo_prueba.insertar(prueba[count].id,prueba[count].nombre)
+                          let ObVentas = prueba[count];
+                        console.log("Id: "+ObVentas.id +"\nVendedor: " + ObVentas.vendedor+ "\nCliente: " + ObVentas.cliente)
+                       tabla.insertar(ObVentas.id,ObVentas.vendedor,ObVentas.cliente)
+                        //grafo_prueba.insertar(prueba[count].id,prueba[count].nombre)
                         var count2 = 0;
-                        for(y in prueba[count].adyacentes){
-                            let objeto = prueba[count].adyacentes[count2];
-                            console.log(objeto.id + "\n" +objeto.nombre + "\n"+ objeto.distancia)
-                            grafo_prueba.agregar_adyacente(prueba[count].id,objeto.id,objeto.distancia);
-                            count2++;
+                        for(y in prueba[count].productos){
+                            let objeto = prueba[count].productos[count2];
+                            console.log("Id Producto: "+objeto.id + "\nNombre Producto: " +objeto.nombre + "\nPrecio Producto: "+ objeto.precio+ "\nCantidad Productos:"+ objeto.cantidad)
+                         //   Producto.insertar(objeto.id,objeto.nombre,objeto.precio,objeto.cantidad)
+                            //  grafo_prueba.agregar_adyacente(prueba[count].id,objeto.id,objeto.distancia);
+                            var total = 0
+                            total = total + objeto.precio * objeto.cantidad;
+                            var factura = 0
+                            factura = factura + total;                            
+                            Array.push(total);
+                            
+                            console.log("Total de "+ObVentas.vendedor +"\n"+factura)
+                          count2++;
+
                         }
+                        //var factura = 0
+                        //factura = factura + total;
+                        //console.log("Total de "+ObVentas.vendedor +"\n"+factura)
                         count++;
                       }
-                      Grafica()
+
+                     //tabla.recorrer()
+                     // Grafica()
                       //grafo_prueba.graficar();
                     };
                   reader.readAsText(arch);
@@ -145,16 +161,213 @@
             document.getElementById("Dot").innerHTML = grafo_prueba.graficar();
 
           }
+          
           function Nuevo_Producto(){
-            var id = document.querySelector('#id').value
-            var nombre = document.querySelector('#nombre').value
-            var precio = document.querySelector('#precio').value
+            var idVentas = document.querySelector('#id').value
+            var vendedor = document.querySelector('#nombre').value
+            var cliente = document.querySelector('#precio').value
             var cantidad = document.querySelector('#cantidad').value              
-            arbol.insertar_nodo(id, nombre,precio, cantidad)
-            document.getElementById("Dot").innerHTML = grafo_prueba.graficar();
+           
+            tabla.insertar(idVentas,vendedor,cliente)
+            console.log("Id: "+idVentas +"\nVendedor: " + vendedor+ "\nCliente: " + cliente)
+            //---------------------------------------------------------------------
+            //Producto.insertar(objeto.id,objeto.nombre,objeto.precio,objeto.cantidad)
+            
+           // document.getElementById("Dot").innerHTML = grafo_prueba.graficar();
           }
 
-   
+
+          //---------------Lista Productos--------------------------------------------
+          class Nodo{
+            constructor(id, nombre, precio, cantidad){
+                this.id = id;
+                this.nombre = nombre;
+                this.precio = precio;
+                this.cantidad = cantidad;
+                this.siguiente = null;
+                this.anterior = null;
+            }
+        }
+        
+        class ListaProductos{
+            constructor(){
+            this.raiz = null;
+            }
+        
+            insertar(id, nombre, precio, cantidad){
+                let nodo_nuevo = new Nodo(id, nombre, precio, cantidad)
+                if (this.raiz == null){
+                    this.raiz = nodo_nuevo;
+                }else{
+                    let temporal = this.raiz;
+                    while(temporal.siguiente != null){
+                        temporal = temporal.siguiente;
+                    }
+                    temporal.siguiente = nodo_nuevo;
+                    temporal.anterior = nodo_nuevo;
+                }
+            }
+            generarDot(){
+                let cadena="digraph arbol {\n" + 'graph [rankdir=LR]' + '\n' + 'node [shape = circle, color=black , style=filled, fillcolor=gray93];\n';
+                cadena+= this.generar_nodos(this.raiz)
+                cadena+="\n"
+                cadena+=this.enlazar(this.raiz)
+                cadena+="\n}"
+        
+                console.log(cadena)
+            }
+        
+            generar_nodos(raiz_actual){ 
+                let nodos =""
+                if(raiz_actual != null){
+                    nodos+= "n"+raiz_actual.id+"[label=\"" + "Id: "+raiz_actual.id+"\"]\n"
+              
+                }
+                return nodos
+            }
+        
+            enlazar(raiz_actual){
+                let cadena=""
+                if(raiz_actual != null){
+                    cadena += this.enlazar(raiz_actual.siguiente)
+                    if(raiz_actual.siguiente != null){
+                        cadena+="n"+raiz_actual.id + "-> n"+raiz_actual.siguiente.id+"\n"
+                    }
+                    if(raiz_actual.anterior != null){
+                        cadena+= "n"+raiz_actual.siguiente.id+"-> n"+raiz_actual.id +"\n"
+                    }
+                
+        
+                    
+                }
+                return cadena
+            }
+        
+        }
+        Producto = new ListaProductos()
+        
+        Producto.generarDot()
+
+        //------------------------Tabla Hash------------------------------------------
+        class nodo{
+            constructor(dato, vendedor, cliente){
+                this.dato = dato;
+                this.vendedor = vendedor;
+                this.cliente = cliente;
+                this.Productos = ListaProductos();
+
+            }
+        }
+        
+        class hash{
+            constructor(){
+                this.claves = this.iniciar_arreglo(7);
+                this.claves_usadas=0;
+                this.size = 7;
+            }
+        
+            iniciar_arreglo(tamaño){
+                let claves=[];
+                for(var i =0;i<tamaño,i++;){
+                    claves[i] = null;
+                }
+                return claves;
+            }
+        
+            calcular_hash(dato){
+                //metodo de division
+                let resultado=0;
+                resultado= dato % this.size;
+                return resultado;
+            }
+        
+            solucion_coliciones(indice){ //metodo de exploracion cuadratica
+                let nuevo_indice =0;
+                let i=0;
+                let disponible = false;
+        
+                while(disponible == false){
+                    nuevo_indice = indice + Math.pow(i,2);
+                    //validar que nuevo_indice sea menor al tañano de la tabla
+                    if(nuevo_indice>= this.size){
+                        nuevo_indice = nuevo_indice-this.size;
+                    }
+                    //validar que la posicion del nuevo indice este disponible
+                    if(this.claves[nuevo_indice]==null){
+                        disponible= true;
+                    }
+                    i++;
+                }
+                return nuevo_indice;
+            }
+        
+            insertar(nuevo){
+                
+                let indice = this.calcular_hash(nuevo.dato);
+        
+                //validaciones 
+                if(this.claves[indice]==null){ //posicion disponible
+                    this.claves[indice] = nuevo;
+                    this.claves_usadas++;
+                }else{ // existe una colicion
+                    indice =  this.solucion_coliciones(indice);
+                    this.claves[indice] = nuevo;
+                    this.claves_usadas++
+                }
+        
+                //validacion de tamaño
+                let Porcentaje_uso = this.claves_usadas/this.size;
+                if(Porcentaje_uso>=0.5){
+                    this.rehash();
+                }
+            }
+        
+            rehash(){
+                //****** Encontrar el siguiente numero primo */
+                let primo= false;
+                let new_size = this.size;
+                while(primo==false){
+                    new_size++;
+                    let cont =0;
+                    for(var i = new_size;i>0; i--){
+                        if(new_size%i ==0){
+                            cont++;
+                        }
+                    }
+                    //validar cuantas veces se dividio exactamente
+                    if(cont == 2){
+                        primo= true
+                    }
+                }
+                //****** crear nuevo arreglo con el tamaño del siguente numero primo */
+                let claves_aux = this.claves;
+        
+                this.size = new_size;
+                this.claves = this.iniciar_arreglo(new_size);
+                this.claves_usadas=0;
+        
+                for(var i =0; i<claves_aux.length;i++){
+                    if(claves_aux[i]!=null){
+                        this.insertar(claves_aux[i]);
+                    }
+                }
+            }
+        
+            recorrer(){
+                for(var i =0;i<this.size;i++){
+                    if(this.claves[i]!=null){
+                        console.log("-->"+this.claves[i].dato);
+                    }else{
+                        console.log("------------");
+                    }
+                }
+            }
+        
+        
+        
+        }
+        
+        let tabla = new hash();
 
 
           

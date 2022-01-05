@@ -1,18 +1,21 @@
 class Nodo{
-    constructor(mes){
-        this.mes = mes;
+    constructor(id, nombre, precio, cantidad){
+        this.id = id;
+        this.nombre = nombre;
+        this.precio = precio;
+        this.cantidad = cantidad;
         this.siguiente = null;
         this.anterior = null;
     }
 }
 
-class ListaMeses{
+class ListaProductos{
     constructor(){
     this.raiz = null;
     }
 
-    insertar(mes){
-        let nodo_nuevo = new Nodo(mes)
+    insertar(id, nombre, precio, cantidad){
+        let nodo_nuevo = new Nodo(id, nombre, precio, cantidad)
         if (this.raiz == null){
             this.raiz = nodo_nuevo;
         }else{
@@ -37,7 +40,7 @@ class ListaMeses{
     generar_nodos(raiz_actual){ 
         let nodos =""
         if(raiz_actual != null){
-            nodos+= "n"+raiz_actual.mes+"[label=\"" + "Id: "+raiz_actual.mes+"\"]\n"
+            nodos+= "n"+raiz_actual.id+"[label=\"" + "Id: "+raiz_actual.id+"\"]\n"
       
         }
         return nodos
@@ -48,10 +51,10 @@ class ListaMeses{
         if(raiz_actual != null){
             cadena += this.enlazar(raiz_actual.siguiente)
             if(raiz_actual.siguiente != null){
-                cadena+="n"+raiz_actual.mes + "-> n"+raiz_actual.siguiente.mes+"\n"
+                cadena+="n"+raiz_actual.id + "-> n"+raiz_actual.siguiente.id+"\n"
             }
             if(raiz_actual.anterior != null){
-                cadena+= "n"+raiz_actual.siguiente.mes+"-> n"+raiz_actual.mes +"\n"
+                cadena+= "n"+raiz_actual.siguiente.id+"-> n"+raiz_actual.id +"\n"
             }
         
 
@@ -61,9 +64,6 @@ class ListaMeses{
     }
 
 }
-Meses = new ListaMeses()
-Meses.insertar(1)
-Meses.insertar(8)
-Meses.insertar(7)
-Meses.insertar(6)
-Meses.generarDot()
+Producto = new ListaProductos()
+Producto.insertar(1)
+Producto.generarDot()

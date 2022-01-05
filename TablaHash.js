@@ -107,64 +107,7 @@ class hash{
             }
         }
     }
-/*
-digraph G {
 
-nodesep=.05;
-
-rankdir=LR;
-
-node [shape=record,width=.1,height=.1];
-
-node [width = 1.5];
-
-node1 [label = "{ n14 | 719 | }"];
-
-node2 [label = "{ a1 | 805 | }"];
-
-node3 [label = "{ i9 | 718 | }"];
-
-node4 [label = "{ e5 | 989 | }"];
-
-node5 [label = "{ t20 | 959 | }"] ;
-
-node6 [label = "{ o15 | 794 | }"] ;
-
-node7 [label = "{ s19 | 659 | }"] ;
-
-f6 -> node5:t20; 
-f5 -> node4:e5;
-f2 -> node3:i9;
-f0 -> node1:n14;
-f1 -> node2:a1;
-
-node2:p -> node6:o15;
-
-node4:p -> node7:s19;
-
-}
-*/
-/*
-    generar_dot(){
-        let cadena="digraph Hash{\n";
-        cadena+="rankdir=LR;\n";
-        cadena+="node [shape=record,width=.1,height=.1];\n";
-        //metodos para graficar los nodos hash
-        cadena+= this.graficar_nodos(this.raiz);
-        cadena+=  this.graficar_enlaces(this.raiz);
-        cadena+="}\n"
-
-        return cadena;
-
-    }
-    graficar_nodos(raiz_actual){
-        let cadena="";
-        cadena+="node [width = 1.5];" + 
-        let contador=0;
-
-    }
-
-*/
 
 
 }

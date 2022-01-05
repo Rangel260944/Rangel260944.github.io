@@ -1,0 +1,133 @@
+{
+    "ventas": [{
+            "id": 1,
+            "vendedor": "juan",
+            "cliente": "pedro",
+            "productos": [{
+                    "id": 7,
+                    "nombre": "pantalones",
+                    "precio": 284.61,
+                    "cantidad": 10
+                },
+                {
+                    "id": 72,
+                    "nombre": "guantes",
+                    "precio": 36.56,
+                    "cantidad": 6
+                },
+                {
+                    "id": 60,
+                    "nombre": "corbatines",
+                    "precio": 56.74,
+                    "cantidad": 17
+                },
+                {
+                    "id": 54,
+                    "nombre": "camiseta",
+                    "precio": 53.95,
+                    "cantidad": 30
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "vendedor": "pedro",
+            "cliente": "antonio",
+            "productos": [{
+                    "id": 72,
+                    "nombre": "guantes",
+                    "precio": 36.56,
+                    "cantidad": 6
+                },
+                {
+                    "id": 84,
+                    "nombre": "medias",
+                    "precio": 136.96,
+                    "cantidad": 16
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "vendedor": "estuardo",
+            "cliente": "alejandra",
+            "productos": [{
+                    "id": 63,
+                    "nombre": "zapatos",
+                    "precio": 18.88,
+                    "cantidad": 7
+                },
+                {
+                    "id": 72,
+                    "nombre": "guantes",
+                    "precio": 36.56,
+                    "cantidad": 11
+                },
+                {
+                    "id": 45,
+                    "nombre": "blusas",
+                    "precio": 106.19,
+                    "cantidad": 8
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "vendedor": "javier",
+            "cliente": "roger",
+            "productos": [{
+                    "id": 54,
+                    "nombre": "camiseta",
+                    "precio": 53.95,
+                    "cantidad": 5
+                },
+                {
+                    "id": 9,
+                    "nombre": "camisa",
+                    "precio": 70.69,
+                    "cantidad": 5
+                }
+            ]
+        },
+        {
+            "id": 5,
+            "vendedor": "miguel",
+            "cliente": "patricio",
+            "productos": [{
+                "id": 7,
+                "nombre": "pantalones",
+                "precio": 284.61,
+                "cantidad": 4
+            }]
+        },
+        {
+            "id": 6,
+            "vendedor": "luisa",
+            "cliente": "mauricio",
+            "productos": [{
+                    "id": 60,
+                    "nombre": "corbatines",
+                    "precio": 56.74,
+                    "cantidad": 2
+                },
+                {
+                    "id": 9,
+                    "nombre": "camisa",
+                    "precio": 70.69,
+                    "cantidad": 1
+                }
+            ]
+        },
+        {
+            "id": 7,
+            "vendedor": "vegeta",
+            "cliente": "german",
+            "productos": [{
+                "id": 63,
+                "nombre": "zapatos",
+                "precio": 18.88,
+                "cantidad": 2
+            }]
+        }
+    ]
+}

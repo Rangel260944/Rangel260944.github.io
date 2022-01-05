@@ -442,7 +442,7 @@
                     let aux = raiz_actual.claves.primero;
                     while(aux!=null){
                         contador++;
-                        cadena+="|{"+aux.dato+"}|<p"+contador+"> ";
+                        cadena+="|{"+"Id: "+aux.dato+"\nNombre: "+aux.nombre+"\nPrecio: "+aux.precio+"\nCantidad: "+aux.cantidad+"}|<p"+contador+"> ";
                         aux= aux.siguiente;
                     }
                     cadena+="\"]"+raiz_actual.claves.primero.dato+";\n";
