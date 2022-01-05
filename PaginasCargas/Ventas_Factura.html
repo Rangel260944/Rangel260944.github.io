@@ -63,17 +63,26 @@
             <br><br>
 
             <h1>Añadir Producto</h1>
-            <label>Id</label>
+            <label>Id Venta</label>
             <input  type="text" name="id" id="id" >
             <br><br>
             <label>Nombre</label>
             <input  type="text" name="nombre" id="nombre" >
             <br><br>
-            <label>Precio</label>
+            <label>Cliente</label>
             <input  type="text" name="precio" id="precio">
             <br><br>
+            <label>Id Producto</label>
+            <input  type="text" name="cantidad" id="idpro" >
+            <br><br>
+            <label>Nombre Producto</label>
+            <input  type="text" name="cantidad" id="nombrepro">   
+            <br><br>
+            <label>Precio</label>
+            <input  type="text" name="cantidad" id="precio">   
+            <br><br>
             <label>Cantidad</label>
-            <input  type="text" name="cantidad" id="cantidad" >
+            <input  type="text" name="cantidad" id="cantidad">                                
             <br><br>
             <button onclick="Nuevo_Producto()" class="btn btn-primary btn-xl rounded-pill mt-5" href="#scroll">Añadir Producto</button>
 
@@ -166,14 +175,19 @@
             var idVentas = document.querySelector('#id').value
             var vendedor = document.querySelector('#nombre').value
             var cliente = document.querySelector('#precio').value
-            var cantidad = document.querySelector('#cantidad').value              
-           
+            var idPro = document.querySelector('#idpro').value              
+            var NombrePro = document.querySelector('#nombrepro').value
+            var precio = document.querySelector('#precio').value
+            var cantidad = document.querySelector('#cantidad').value
             tabla.insertar(idVentas,vendedor,cliente)
             console.log("Id: "+idVentas +"\nVendedor: " + vendedor+ "\nCliente: " + cliente)
             //---------------------------------------------------------------------
-            //Producto.insertar(objeto.id,objeto.nombre,objeto.precio,objeto.cantidad)
-            
-           // document.getElementById("Dot").innerHTML = grafo_prueba.graficar();
+            Producto.insertar(idPro,NombrePro,precio,cantidad)
+            console.log("Id Producto: "+idPro + "\nNombre Producto: " +NombrePro + "\nPrecio Producto: "+ precio+ "\nCantidad Productos:"+ cantidad)
+            var total = 0
+            total = precio * cantidad;    
+            console.log("Total de "+cliente +"\n"+factura)       
+            // document.getElementById("Dot").innerHTML = grafo_prueba.graficar();
           }
 
 
